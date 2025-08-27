@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>נוכחות - אשר לשלמה</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📝 נוכחות - ישיבת אשר לשלמה</h1>
+
+    <div class="selectors">
+      <label for="day">בחר יום:</label>
+      <select id="day">
+        <option value="ראשון">ראשון</option>
+        <option value="שני">שני</option>
+        <option value="שלישי">שלישי</option>
+        <option value="רביעי">רביעי</option>
+        <option value="חמישי">חמישי</option>
+      </select>
+
+      <label for="session">בחר שיעור/סדר:</label>
+      <select id="session">
+        <option value="שחרית">שחרית</option>
+        <option value="סדר א">סדר א</option>
+        <option value="מנחה">מנחה</option>
+        <option value="סדר ב">סדר ב</option>
+        <option value="סדר ג">סדר ג</option>
+      </select>
+
+      <button onclick="loadList()">טען שמות</button>
+    </div>
+
+    <form id="attendance-form" class="hidden">
+      <h2 id="list-title"></h2>
+      <div id="students-list"></div>
+      <button type="submit">💾 שמור</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
