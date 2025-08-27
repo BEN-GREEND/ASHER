@@ -3,42 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>נוכחות - אשר לשלמה</title>
+  <title>מערכת הנוכחות – אשר לשלמה</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>📝 נוכחות - ישיבת אשר לשלמה</h1>
-
-    <div class="selectors">
-      <label for="day">בחר יום:</label>
-      <select id="day">
-        <option value="ראשון">ראשון</option>
-        <option value="שני">שני</option>
-        <option value="שלישי">שלישי</option>
-        <option value="רביעי">רביעי</option>
-        <option value="חמישי">חמישי</option>
-      </select>
-
-      <label for="session">בחר שיעור/סדר:</label>
-      <select id="session">
-        <option value="שחרית">שחרית</option>
-        <option value="סדר א">סדר א</option>
-        <option value="מנחה">מנחה</option>
-        <option value="סדר ב">סדר ב</option>
-        <option value="סדר ג">סדר ג</option>
-      </select>
-
-      <button onclick="loadList()">טען שמות</button>
-    </div>
-
-    <form id="attendance-form" class="hidden">
-      <h2 id="list-title"></h2>
-      <div id="students-list"></div>
-      <button type="submit">💾 שמור</button>
-    </form>
-  </div>
-
+  <header>
+    <h1>מערכת נוכחות – אשר לשלמה</h1>
+    <nav>
+      <button onclick="showSection('presence')">📝 נוכחות</button>
+      <button onclick="showSection('daily')">📊 ניקוד יומי</button>
+      <button onclick="showSection('weekly')">📈 ניקוד שבועי</button>
+      <button onclick="showSection('monthly')">🗓️ ניקוד חודשי</button>
+    </nav>
+  </header>
+  <main>
+    <section id="presence" class="active">
+      <div id="date-picker"></div>
+      <div class="selectors">
+        <label for="session">שיעור / סדר:</label>
+        <select id="session">
+          <option>שחרית</option>
+          <option>סדר א</option>
+          <option>מנחה</option>
+          <option>סדר ב</option>
+          <option>סדר ג</option>
+        </select>
+        <button onclick="loadPresence()">טען נוכחות</button>
+      </div>
+      <form id="attendance-form" class="hidden"></form>
+    </section>
+    <section id="daily">
+      <h2>טבלת ניקוד יומי</h2>
+      <input type="text" id="searchDaily" placeholder="חפש שם..." oninput="renderDaily()">
+      <button onclick="exportTable('dailyTable', 'daily.csv')">ייצוא CSV</button>
+      <button onclick="exportPDF('dailyTable')">ייצוא PDF</button>
+      <div id="dailyTableContainer"></div>
+    </section>
+    <section id="weekly">
+      <h2>טבלת ניקוד שבועי</h2>
+      <input type="text" id="searchWeekly" placeholder="חפש שם..." oninput="renderWeekly()">
+      <button onclick="exportTable('weeklyTable', 'weekly.csv')">ייצוא CSV</button>
+      <button onclick="exportPDF('weeklyTable')">ייצוא PDF</button>
+      <div id="weeklyTableContainer"></div>
+    </section>
+    <section id="monthly">
+      <h2>טבלת ניקוד חודשי</h2>
+      <input type="text" id="searchMonthly" placeholder="חפש שם..." oninput="renderMonthly()">
+      <button onclick="exportTable('monthlyTable', 'monthly.csv')">ייצוא CSV</button>
+      <button onclick="exportPDF('monthlyTable')">ייצוא PDF</button>
+      <div id="monthlyTableContainer"></div>
+    </section>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
